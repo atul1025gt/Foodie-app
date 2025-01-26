@@ -1,28 +1,29 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home/Home'
-import Navbar from './components/Navbar/Navbar/Navbar'
-import Cart from './pages/cart/Cart'
-import placeOrder from './pages/placeOrder/placeOrder'
-import Footer from './components/Footer/Footer'
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import Navbar from './components/Navbar/Navbar/Navbar';
+import Cart from './pages/cart/Cart'; 
+import PlaceOrder from './pages/PlaceOrder/PlaceOrder'; 
+import Footer from './components/Footer/Footer';
+import LoginPopup from './components/LoginPopup/LoginPopup';
 
 const App = () => {
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
     <>
-    <div className='app'>
-      <Navbar/>
-      <Routes>
-        <Route path='/' element ={<Home/>} />
-        <Route path='/Cart' element={<Cart/>}/>
-        <Route path='/order' element={<placeOrder/>}/>
-
-      </Routes>
-
-      
-    </div>
-    <Footer/>
+      {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : null}
+      <div className='app'>
+        <Navbar setShowLogin={setShowLogin} />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/order' element={<PlaceOrder />} />
+        </Routes>
+      </div>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
